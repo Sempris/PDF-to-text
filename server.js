@@ -8,9 +8,9 @@ app.use("/", express.static("public"));
 app.use(fileUpload());
 
 app.post("/extract-text", (req, res) => {
-  if (!req.files && !req.files.pdfFile) {
-    res.status(400);
-    res.end();
+  if (!req.files || !req.files.pdfFile) {
+    return res.status(400);
+    // res.end();
   }
 
   pdfParse(req.files.pdfFile).then((result) => {
